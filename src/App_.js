@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import Comentario from './components/Comentario'
+import Comentario from './components/Comentario';
 
 class App extends Component {
 
   state = {
     comentarios: [
       {
-        nome: 'João',
-        email: 'joao@mail.com',
-        data: new Date(2020, 3, 19, 17, 30, 0),
+        nome: 'Silvania',
+        email: 'silvania@email.com',
+        data: new Date(2025, 4, 25, 17, 40, 0),
         mensagem: 'Olá, tudo bem?'
       },
       {
-        nome: 'Pedro',
-        email: 'pedro@mail.com',
-        data: new Date(2020, 3, 22, 12, 15, 0),
-        mensagem: 'Olá, tudo bem sim....'
+        nome: 'Safira',
+        email: 'safira@email.com',
+        data: new Date(2015, 12, 18, 12, 15, 0),
+        mensagem: 'Tudo sim, e você?'
       }
     ],
     novoComentario: {
@@ -28,23 +28,23 @@ class App extends Component {
   }
 
   adicionarComentario = evento => {
-    evento.preventDefault(); //anula o evento
-    const novoComentario = { ...this.state.novoComentario, data: new Date() }
+    evento.preventDefault(); //Anula o evento
+    const novoComentario = {...this.state.novoComentario, data: new Date()}
     this.setState({
       comentarios: [...this.state.comentarios, novoComentario],
-      novoComentario: { nome: '', email: '', mensagem: '' }
+      novoComentario: {nome: '', email: '', mensagem: ''}
     })
   }
 
   removerComentario = comentario => {
     let lista = this.state.comentarios;
     lista = lista.filter(c => c !== comentario)
-    this.setState({ comentarios: lista })
+    this.setState({comentarios: lista})
   }
 
   digitacao = evento => {
-    const { name, value } = evento.target;
-    this.setState({ novoComentario: { ...this.state.novoComentario, [name]: value } })
+    const {name, value} = evento.target;
+    this.setState({novoComentario: {...this.state.novoComentario, [name]: value}})
   }
 
   render() {
@@ -63,38 +63,41 @@ class App extends Component {
         ))}
 
         <form method="post" onSubmit={this.adicionarComentario} className="Novo-Comentario">
-          <h2>Adicionar Comentário</h2>
+          <h2>Adicionar comentário</h2>
           <div>
             <input
-              type="text"
-              name="nome"
+              type="text" 
+              name="nome" 
+              placeholder='Digite seu nome' 
               value={this.state.novoComentario.nome}
               onChange={this.digitacao}
-              required
-              placeholder="Digite seu nome" />
+              required>
+            </input>
           </div>
           <div>
             <input
-              type="email"
-              name="email"
-              value={this.state.novoComentario.email}
-              onChange={this.digitacao}
+              type="email" 
+              name="email" 
+              placeholder='Digite seu e-mail' 
               required
-              placeholder="Digite seu email" />
+              value={this.state.novoComentario.email}
+              onChange={this.digitacao}>
+            </input>
           </div>
           <div>
             <textarea
-              name="mensagem"
-              value={this.state.novoComentario.mensagem}
-              onChange={this.digitacao}
+              name="mensagem" 
+              rows="4" 
               required
-              rows="4" />
+              value={this.state.novoComentario.mensagem}
+              onChange={this.digitacao}>
+            </textarea>
           </div>
-          <button type="submit">Adicionar Comentário</button>
+          <button type="submit">Adicionar comentário</button>
         </form>
       </div>
     );
   }
-}
+}  
 
 export default App;
